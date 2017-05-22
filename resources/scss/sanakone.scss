@@ -1,6 +1,10 @@
 .word-result {
     font-size: 2em;
 
+    > * {
+        vertical-align: top;
+    }
+
     .pronoun {
         color: red;
     }
@@ -11,5 +15,15 @@
 
     .personal-ending {
         color: green;
+    }
+
+    .word-part {
+        display: inline-block;
+        max-width: 20%;
+
+        .description {
+            font-size: 0.5em;
+            color: initial;
+        }
     }
 }
