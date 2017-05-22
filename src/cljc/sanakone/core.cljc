@@ -20,7 +20,7 @@
   (first (filter #(re-find (:matcher %) infinitive) verb-rules)))
 
 (defn conjugate [infinitive {:keys [person] :as opts}]
-  (let [{:keys [rule-name stem]} (find-verb-rule infinitive)]
+  (when-let [{:keys [rule-name stem]} (find-verb-rule infinitive)]
     {:person person
      :pronoun (get pronouns person)
      :word-parts [{:word-type :stem
