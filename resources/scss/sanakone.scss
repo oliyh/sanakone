@@ -1,3 +1,17 @@
+body {
+    background-image: url('https://farm8.staticflickr.com/7738/18078262162_74fbc8bce7_k_d.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.mdl-card {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.mdl-textfield {
+    width: 100%;
+}
+
 .word-result {
     font-size: 2em;
 
@@ -6,24 +20,30 @@
     }
 
     .pronoun {
-        color: red;
+        color: rgb(233, 30, 99);
     }
 
     .stem {
-        color: blue;
+        color: rgb(63, 81, 181);
     }
 
     .personal-ending {
-        color: green;
+        color: rgb(0, 150, 136);
     }
 
     .word-part {
         display: inline-block;
-        max-width: 20%;
 
         .description {
             font-size: 0.5em;
-            color: initial;
+            color: inherit;
+            position: absolute;
+            max-width: 150px;
+            transform: translateY(1em);
+        }
+
+        &:nth-child(odd) .description {
+            transform: translateY(calc(-100% - 2em));
         }
     }
 }
