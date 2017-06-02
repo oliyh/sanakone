@@ -64,4 +64,46 @@
                             :text "opiskelen"
                             :description "The personal ending for first-singular is n"}]}
 
-             (kone/conjugate "opiskella" {:person :first-singular}))))))
+             (kone/conjugate "opiskella" {:person :first-singular}))))
+
+    (testing "type four verbs"
+      (is (= {:infinitive "pelata"
+              :rule-name "Type 4 verb"
+              :person :first-singular
+              :translation "play"
+              :pronoun "minä"
+              :word-parts [{:word-type :infinitive
+                            :text "pelata"
+                            :description "The infinitive"}
+                           {:word-type :stem
+                            :text "pela"
+                            :description "Remove the infinitive marker 'ta'"}
+                           {:word-type :vowel-addition
+                            :text "pelaa"
+                            :description "Add 'a' before the personal ending"}
+                           {:word-type :personal-ending
+                            :text "pelaan"
+                            :description "The personal ending for first-singular is n"}]}
+
+             (kone/conjugate "pelata" {:person :first-singular}))))
+
+    (testing "type five verbs"
+      (is (= {:infinitive "tarvita"
+              :rule-name "Type 5 verb"
+              :person :first-singular
+              :translation "need"
+              :pronoun "minä"
+              :word-parts [{:word-type :infinitive
+                            :text "tarvita"
+                            :description "The infinitive"}
+                           {:word-type :stem
+                            :text "tarvit"
+                            :description "Remove the infinitive marker 'a'"}
+                           {:word-type :vowel-addition
+                            :text "tarvitse"
+                            :description "Add 'se' before the personal ending"}
+                           {:word-type :personal-ending
+                            :text "tarvitsen"
+                            :description "The personal ending for first-singular is n"}]}
+
+             (kone/conjugate "tarvita" {:person :first-singular}))))))

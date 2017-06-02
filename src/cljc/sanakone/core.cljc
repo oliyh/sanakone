@@ -20,8 +20,8 @@
 
 (defn- vowel-addition [vowel context text]
   {:word-type :vowel-addition
-   :text (str text "e")
-   :description "Add 'e' before the personal ending"})
+   :text (str text vowel)
+   :description (str "Add '" vowel "' before the personal ending")})
 
 (defn- add-personal-ending [{:keys [person]} text]
   {:word-type :personal-ending
@@ -47,10 +47,26 @@
                 (partial vowel-addition "e")
                 add-personal-ending]})
 
+(def type-four-verb
+  {:rule-name "Type 4 verb"
+   :matcher #"(ata|atä|uta|ota)$"
+   :transforms [(partial remove-infinitive-marker #"(ta|tä)$")
+                (partial vowel-addition "a")
+                add-personal-ending]})
+
+(def type-five-verb
+  {:rule-name "Type 5 verb"
+   :matcher #"(ita|itä)$"
+   :transforms [(partial remove-infinitive-marker #"(a|ä)$")
+                (partial vowel-addition "se")
+                add-personal-ending]})
+
 (def verb-rules
   [type-one-verb
    type-two-verb
-   type-three-verb])
+   type-three-verb
+   type-four-verb
+   type-five-verb])
 
 (defn- find-verb-rule [infinitive]
   (when-not (string/blank? infinitive)
