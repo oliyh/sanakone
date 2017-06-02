@@ -25,4 +25,22 @@
                             :text "laulan"
                             :description "The personal ending for first-singular is n"}]}
 
-             (kone/conjugate "laulaa" {:person :first-singular}))))))
+             (kone/conjugate "laulaa" {:person :first-singular}))))
+
+    (testing "type two verbs"
+      (is (= {:infinitive "juoda"
+              :rule-name "Type 2 verb"
+              :person :first-singular
+              :translation "drink"
+              :pronoun "minä"
+              :word-parts [{:word-type :infinitive
+                            :text "juoda"
+                            :description "The infinitive"}
+                           {:word-type :stem
+                            :text "juo"
+                            :description "Remove the infinitive marker 'da'"}
+                           {:word-type :personal-ending
+                            :text "juon"
+                            :description "The personal ending for first-singular is n"}]}
+
+             (kone/conjugate "juoda" {:person :first-singular}))))))

@@ -29,8 +29,15 @@
    :transforms [(partial remove-infinitive-marker #"[aeiouyäö]$")
                 add-personal-ending]})
 
+(def type-two-verb
+  {:rule-name "Type 2 verb"
+   :matcher #"(da|dä)$"
+   :transforms [(partial remove-infinitive-marker #"(da|dä)$")
+                add-personal-ending]})
+
 (def verb-rules
-  [type-one-verb])
+  [type-one-verb
+   type-two-verb])
 
 (defn- find-verb-rule [infinitive]
   (when-not (string/blank? infinitive)
