@@ -1,5 +1,6 @@
 (ns sanakone.core
-  (:require [clojure.string :as string]))
+  (:require [sanakone.translate :as translate]
+            [clojure.string :as string]))
 
 (def pronouns
   {:first-singular "minä"})
@@ -32,13 +33,15 @@
   [type-one-verb])
 
 (defn- find-verb-rule [infinitive]
-  (first (filter #(re-find (:matcher %) infinitive) verb-rules)))
+  (when-not (string/blank? infinitive)
+    (first (filter #(re-find (:matcher %) infinitive) verb-rules))))
 
 (defn conjugate [infinitive {:keys [person] :as opts}]
   (when-let [{:keys [rule-name transforms]} (find-verb-rule infinitive)]
     (let [input {:infinitive infinitive
                  :rule-name rule-name
                  :person person
+                 :translation (translate/verb infinitive)
                  :pronoun (get pronouns person)}]
       (assoc input
              :word-parts (reduce (fn [parts transform]

@@ -4,11 +4,16 @@
 
 (deftest conjugate-test
 
+  (testing "nil yields nil"
+    (is (nil? (kone/conjugate nil {:person :first-singular})))
+    (is (nil? (kone/conjugate "" {:person :first-singular}))))
+
   (testing "present tense"
     (testing "type one verbs"
       (is (= {:infinitive "laulaa"
               :rule-name "Type 1 verb"
               :person :first-singular
+              :translation "sing"
               :pronoun "minä"
               :word-parts [{:word-type :infinitive
                             :text "laulaa"

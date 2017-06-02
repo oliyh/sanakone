@@ -26,11 +26,13 @@
            :on-change #(re-frame/dispatch [::model/input-text (-> % .-target .-value)])}]]]])))
 
 (defn- result []
-  (when-let [result (re-frame/subscribe [::model/result])]
+  (let [result (re-frame/subscribe [::model/result])]
     (fn []
-      (let [{:keys [rule-name infinitive pronoun conjugated word-parts]} @result]
+      (when-let [{:keys [rule-name infinitive translation pronoun conjugated word-parts]}
+                 @result]
         [card
-         [:span infinitive [:br] [:small rule-name]]
+         [:span infinitive (when translation [:small " (" translation ")"])
+          [:br] [:small rule-name]]
          [:div
           [:div.word-result
            [:div
