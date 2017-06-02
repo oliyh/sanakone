@@ -41,10 +41,7 @@
                               :class (name word-type)}
               [:div text]
               [:span.description
-               (map-indexed (fn [i d]
-                              ^{:key i}
-                              [:div d])
-                            description)]])]]]))))
+               description]])]]]))))
 
 (defn home []
   (re-frame/dispatch-sync [::model/init])

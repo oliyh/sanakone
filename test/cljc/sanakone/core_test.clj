@@ -10,12 +10,14 @@
               :rule-name "Type 1 verb"
               :person :first-singular
               :pronoun "minä"
-              :word-parts [{:word-type :stem
+              :word-parts [{:word-type :infinitive
+                            :text "laulaa"
+                            :description "The infinitive"}
+                           {:word-type :stem
                             :text "laula"
-                            :description ["Remove the infinitive marker 'a'"
-                                          "laulaa -> laula"]}
+                            :description "Remove the infinitive marker 'a'"}
                            {:word-type :personal-ending
-                            :text "n"
-                            :description ["The personal ending for first-singular is n"]}]}
+                            :text "laulan"
+                            :description "The personal ending for first-singular is n"}]}
 
              (kone/conjugate "laulaa" {:person :first-singular}))))))

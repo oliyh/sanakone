@@ -7,12 +7,26 @@
 (def personal-endings
   {:first-singular "n"})
 
+(defn- classify-infinitive [text]
+  {:word-type :infinitive
+   :text text
+   :description "The infinitive"})
+
+(defn- remove-infinitive-marker [infinitive-marker context text]
+  {:word-type :stem
+   :text (string/replace text infinitive-marker "")
+   :description (str "Remove the infinitive marker '" (first (re-find infinitive-marker text)) "'")})
+
+(defn- add-personal-ending [{:keys [person]} text]
+  {:word-type :personal-ending
+   :text (str text (get personal-endings person))
+   :description (str "The personal ending for " (name person) " is " (get personal-endings person))})
+
 (def type-one-verb
   {:rule-name "Type 1 verb"
    :matcher #"[aeiouyäö]{2}$"
-   :stem (fn [infinitive]
-           (apply str (drop-last infinitive)))
-   :infinitive-marker #"[aeiouyäö]$"})
+   :transforms [(partial remove-infinitive-marker #"[aeiouyäö]$")
+                add-personal-ending]})
 
 (def verb-rules
   [type-one-verb])
@@ -21,15 +35,13 @@
   (first (filter #(re-find (:matcher %) infinitive) verb-rules)))
 
 (defn conjugate [infinitive {:keys [person] :as opts}]
-  (when-let [{:keys [rule-name stem infinitive-marker]} (find-verb-rule infinitive)]
-    {:infinitive infinitive
-     :rule-name rule-name
-     :person person
-     :pronoun (get pronouns person)
-     :word-parts [{:word-type :stem
-                   :text (stem infinitive)
-                   :description [(str "Remove the infinitive marker '" (first (re-find infinitive-marker infinitive)) "'")
-                                 (str infinitive " -> " (stem infinitive))]}
-                  {:word-type :personal-ending
-                   :text (get personal-endings person)
-                   :description [(str "The personal ending for " (name person) " is " (get personal-endings person))]}]}))
+  (when-let [{:keys [rule-name transforms]} (find-verb-rule infinitive)]
+    (let [input {:infinitive infinitive
+                 :rule-name rule-name
+                 :person person
+                 :pronoun (get pronouns person)}]
+      (assoc input
+             :word-parts (reduce (fn [parts transform]
+                                   (conj parts (transform input (:text (last parts)))))
+                                 [(classify-infinitive infinitive)]
+                                 transforms)))))
