@@ -2,6 +2,8 @@
 
 Learn Finnish with explanations
 
+Try at [https://oliyh.github.io/sanakone/](https://oliyh.github.io/sanakone/)
+
 ## dev
 
 ### CLJS
