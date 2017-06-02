@@ -8,6 +8,11 @@
 (def personal-endings
   {:first-singular "n"})
 
+(defn- harmonic-vowel [text vowel]
+  (if (re-find #"[aou]" text)
+    vowel
+    (get {"a" "ä" "o" "ö"} vowel)))
+
 (defn- classify-infinitive [text]
   {:word-type :infinitive
    :text text
@@ -19,9 +24,10 @@
    :description (str "Remove the infinitive marker '" (first (re-find infinitive-marker text)) "'")})
 
 (defn- vowel-addition [vowel context text]
-  {:word-type :vowel-addition
-   :text (str text vowel)
-   :description (str "Add '" vowel "' before the personal ending")})
+  (let [vowel (harmonic-vowel text vowel)]
+    {:word-type :vowel-addition
+     :text (str text vowel)
+     :description (str "Add '" vowel "' before the personal ending")}))
 
 (defn- add-personal-ending [{:keys [person]} text]
   {:word-type :personal-ending
@@ -49,7 +55,7 @@
 
 (def type-four-verb
   {:rule-name "Type 4 verb"
-   :matcher #"(ata|atä|uta|ota)$"
+   :matcher #"(ata|ätä|uta|ota)$"
    :transforms [(partial remove-infinitive-marker #"(ta|tä)$")
                 (partial vowel-addition "a")
                 add-personal-ending]})

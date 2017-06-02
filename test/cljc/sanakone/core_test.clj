@@ -106,4 +106,10 @@
                             :text "tarvitsen"
                             :description "The personal ending for first-singular is n"}]}
 
-             (kone/conjugate "tarvita" {:person :first-singular}))))))
+             (kone/conjugate "tarvita" {:person :first-singular})))))
+
+  (testing "vowel harmony"
+    (is (= "herään" (-> (kone/conjugate "herätä" {:person :first-singular})
+                        :word-parts
+                        last
+                        :text)))))
