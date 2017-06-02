@@ -1,5 +1,5 @@
 (ns sanakone.translate
-  (:require [sanakone.macros :refer [defdata]]
+  (:require [sanakone.macros :refer-macros [defdata]]
             [clojure.string :as string]))
 
 (defdata verbs "verbs.edn")

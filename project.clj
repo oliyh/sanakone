@@ -22,17 +22,19 @@
                                    :pretty-print true}}
                        {:id "prod"
                         :source-paths ["src/cljc" "src/cljs"]
-                        :compiler {:output-to "resources/public/cljs/main.js"
-                                   :output-dir "resources/public/cljs/prod"
+                        :compiler {:output-to "dist/cljs/main.js"
                                    :main "sanakone.app"
-                                   :asset-path "/cljs/prod"
+                                   :parallel-build true
                                    :optimizations :advanced}}]}
   :figwheel {:css-dirs ["resources/public/css"]}
   :scss {:builds {:dev {:source-dir "resources/scss"
                         :dest-dir "resources/public/css"
                         :executable "sassc"
                         :args ["-m" "-I" "scss/" "-t" "nested"]}}}
-
+  :aliases {"build-pages" ["do"
+                           ["run" "-m" "pages/build"]
+                           ["cljsbuild" "once" "prod"]]
+            "deploy-pages" ["run" "-m" "pages/push"]}
   :profiles {:dev {:source-paths ["dev" "src/cljc"]
                    :dependencies [[org.clojure/tools.namespace "0.2.11"]
 
@@ -41,7 +43,10 @@
                                   [com.cemerick/piggieback "0.2.1"]
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [org.clojure/tools.reader "0.10.0"]
-                                  [org.clojure/tools.trace "0.7.9"]]
+                                  [org.clojure/tools.trace "0.7.9"]
+
+                                  ;; gh-pages deploy
+                                  [leiningen-core "2.7.1"]]
                    :repl-options {:init-ns user
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                    :plugins [[lein-cljsbuild "1.1.6"]
