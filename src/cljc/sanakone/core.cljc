@@ -18,6 +18,11 @@
    :text (string/replace text infinitive-marker "")
    :description (str "Remove the infinitive marker '" (first (re-find infinitive-marker text)) "'")})
 
+(defn- vowel-addition [vowel context text]
+  {:word-type :vowel-addition
+   :text (str text "e")
+   :description "Add 'e' before the personal ending"})
+
 (defn- add-personal-ending [{:keys [person]} text]
   {:word-type :personal-ending
    :text (str text (get personal-endings person))
@@ -35,9 +40,17 @@
    :transforms [(partial remove-infinitive-marker #"(da|dä)$")
                 add-personal-ending]})
 
+(def type-three-verb
+  {:rule-name "Type 3 verb"
+   :matcher #"(la|lä|sta|stä)$"
+   :transforms [(partial remove-infinitive-marker #"(la|lä|ta|tä)$")
+                (partial vowel-addition "e")
+                add-personal-ending]})
+
 (def verb-rules
   [type-one-verb
-   type-two-verb])
+   type-two-verb
+   type-three-verb])
 
 (defn- find-verb-rule [infinitive]
   (when-not (string/blank? infinitive)

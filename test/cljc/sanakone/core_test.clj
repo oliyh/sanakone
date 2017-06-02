@@ -43,4 +43,25 @@
                             :text "juon"
                             :description "The personal ending for first-singular is n"}]}
 
-             (kone/conjugate "juoda" {:person :first-singular}))))))
+             (kone/conjugate "juoda" {:person :first-singular}))))
+
+    (testing "type three verbs"
+      (is (= {:infinitive "opiskella"
+              :rule-name "Type 3 verb"
+              :person :first-singular
+              :translation "study something"
+              :pronoun "minä"
+              :word-parts [{:word-type :infinitive
+                            :text "opiskella"
+                            :description "The infinitive"}
+                           {:word-type :stem
+                            :text "opiskel"
+                            :description "Remove the infinitive marker 'la'"}
+                           {:word-type :vowel-addition
+                            :text "opiskele"
+                            :description "Add 'e' before the personal ending"}
+                           {:word-type :personal-ending
+                            :text "opiskelen"
+                            :description "The personal ending for first-singular is n"}]}
+
+             (kone/conjugate "opiskella" {:person :first-singular}))))))
