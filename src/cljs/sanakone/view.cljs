@@ -28,20 +28,23 @@
 (defn- result []
   (when-let [result (re-frame/subscribe [::model/result])]
     (fn []
-      (let [{:keys [rule-name infinitive pronoun word-parts]} @result]
+      (let [{:keys [rule-name infinitive pronoun conjugated word-parts]} @result]
         [card
          [:span infinitive [:br] [:small rule-name]]
          [:div
           [:div.word-result
-           [:span.pronoun {:title "pronoun"} pronoun]
-           " "
-           (for [{:keys [word-type text description]} word-parts]
-             ^{:key word-type}
-             [:div.word-part {:title (name word-type)
-                              :class (name word-type)}
-              [:div text]
-              [:span.description
-               description]])]]]))))
+           [:div
+            [:span.pronoun {:title "pronoun"} pronoun]
+            " "
+            [:span.conjugated {:title "conjugated"} conjugated]]
+           [:div.transforms
+            (for [{:keys [word-type text description]} word-parts]
+              ^{:key word-type}
+              [:div {:title (name word-type)
+                     :class (name word-type)}
+               [:div.text text]
+               [:div.description
+                description]])]]]]))))
 
 (defn home []
   (re-frame/dispatch-sync [::model/init])

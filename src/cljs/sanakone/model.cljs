@@ -21,7 +21,9 @@
  (fn []
    [(re-frame/subscribe [::input-text])])
  (fn [[input-text]]
-   (kone/conjugate input-text {:person :first-singular})))
+   (let [{:keys [word-parts] :as result}
+         (kone/conjugate input-text {:person :first-singular})]
+     (assoc result :conjugated (-> result :word-parts last :text)))))
 
 (re-frame/reg-event-db
  ::init
