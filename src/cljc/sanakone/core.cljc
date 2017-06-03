@@ -11,7 +11,9 @@
 (defn- harmonic-vowel [text vowel]
   (if (re-find #"[aou]" text)
     vowel
-    (get {"a" "ä" "o" "ö"} vowel)))
+    (-> vowel
+        (string/replace "a" "ä")
+        (string/replace "o" "ö"))))
 
 (defn- classify-infinitive [text]
   {:word-type :infinitive

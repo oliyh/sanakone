@@ -112,4 +112,9 @@
     (is (= "herään" (-> (kone/conjugate "herätä" {:person :first-singular})
                         :word-parts
                         last
-                        :text)))))
+                        :text)))
+
+    (is (= "hävitsen" (-> (kone/conjugate "hävitä" {:person :first-singular})
+                          :word-parts
+                          last
+                          :text)))))
