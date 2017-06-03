@@ -22,6 +22,9 @@
                            {:word-type :stem
                             :text "laula"
                             :description "Remove the infinitive marker 'a'"}
+                           {:word-type :consonant-gradation
+                            :text "laula"
+                            :description "Apply consonant gradation (strong-weak)"}
                            {:word-type :personal-ending
                             :text "laulan"
                             :description "The personal ending for first-singular is n"}]}
@@ -60,6 +63,9 @@
                            {:word-type :stem
                             :text "opiskel"
                             :description "Remove the infinitive marker 'la'"}
+                           {:word-type :consonant-gradation
+                            :text "opiskel"
+                            :description "Apply consonant gradation (weak-strong)"}
                            {:word-type :vowel-addition
                             :text "opiskele"
                             :description "Add 'e' before the personal ending"}
@@ -82,6 +88,9 @@
                            {:word-type :stem
                             :text "pela"
                             :description "Remove the infinitive marker 'ta'"}
+                           {:word-type :consonant-gradation
+                            :text "pela"
+                            :description "Apply consonant gradation (weak-strong)"}
                            {:word-type :vowel-addition
                             :text "pelaa"
                             :description "Add 'a' before the personal ending"}
@@ -115,4 +124,16 @@
 
   (testing "vowel harmony"
     (is (= "herään" (:conjugated (kone/conjugate "herätä" {:person :first-singular}))))
-    (is (= "hävitsen" (:conjugated (kone/conjugate "hävitä" {:person :first-singular}))))))
+    (is (= "hävitsen" (:conjugated (kone/conjugate "hävitä" {:person :first-singular})))))
+
+  (testing "consonant gradation"
+    (testing "strong to weak"
+      (testing "in type 1 verbs"
+        (is (= "tiedan" (:conjugated (kone/conjugate "tietaa" {:person :first-singular}))))))
+
+    (testing "weak to strong"
+      (testing "in type 3 verbs"
+        (is (= "ajattelen" (:conjugated (kone/conjugate "ajatella" {:person :first-singular})))))
+
+      (testing "in type 4 verbs"
+        (is (= "tapaan" (:conjugated (kone/conjugate "tavata" {:person :first-singular}))))))))

@@ -1,5 +1,6 @@
 (ns sanakone.core
   (:require [sanakone.translate :as translate]
+            [sanakone.string-utils :refer [replace-last]]
             [clojure.string :as string]))
 
 (def pronouns
@@ -14,6 +15,39 @@
     (-> vowel
         (string/replace "a" "ä")
         (string/replace "o" "ö"))))
+
+(defn- last-syllable [text]
+  (rest (re-find #"(.*?)([bcdfghjklmnpqrstvwxz]+[aäeioöuy]+[bcdfghjklmnpqrstvwxz]*)$" text)))
+
+(defn- graded-consonants [direction text]
+  (let [gradations [["sk" "sk"]
+                    ["tk" "tk"]
+                    ["kk" "k"]
+                    ["pp" "p"]
+                    ["tt" "t"]
+                    ["k"  ""]
+                    ["p"  "v"]
+                    ["t"  "d"]
+                    ["lt" "ll"]
+                    ["nt" "nn"]
+                    ["rt" "rr"]]
+        [prefix last-syllable] (last-syllable text)]
+    (str
+     prefix
+     (reduce (fn [text [strong weak]]
+               (let [[find replace] (if (= :strong-weak direction)
+                                      [strong weak]
+                                      [weak strong])]
+                 (if (and (not= "k" strong) (re-find (re-pattern find) text))
+                   (reduced (replace-last text find replace))
+                   text)))
+             last-syllable
+             gradations))))
+
+(defn- consonant-gradation [direction context text]
+  {:word-type :consonant-gradation
+   :text (graded-consonants direction text)
+   :description (str "Apply consonant gradation (" (name direction) ")")})
 
 (defn- classify-infinitive [text]
   {:word-type :infinitive
@@ -40,6 +74,7 @@
   {:rule-name "Type 1 verb"
    :matcher #"[aeiouyäö]{2}$"
    :transforms [(partial remove-infinitive-marker #"[aeiouyäö]$")
+                (partial consonant-gradation :strong-weak)
                 add-personal-ending]})
 
 (def type-two-verb
@@ -52,6 +87,7 @@
   {:rule-name "Type 3 verb"
    :matcher #"(la|lä|sta|stä)$"
    :transforms [(partial remove-infinitive-marker #"(la|lä|ta|tä)$")
+                (partial consonant-gradation :weak-strong)
                 (partial vowel-addition "e")
                 add-personal-ending]})
 
@@ -59,6 +95,7 @@
   {:rule-name "Type 4 verb"
    :matcher #"(ata|ätä|uta|ota)$"
    :transforms [(partial remove-infinitive-marker #"(ta|tä)$")
+                (partial consonant-gradation :weak-strong)
                 (partial vowel-addition "a")
                 add-personal-ending]})
 
