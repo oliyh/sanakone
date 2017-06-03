@@ -30,9 +30,14 @@
   :scss {:builds {:dev {:source-dir "resources/scss"
                         :dest-dir "resources/public/css"
                         :executable "sassc"
-                        :args ["-m" "-I" "scss/" "-t" "nested"]}}}
+                        :args ["-m" "-I" "scss/" "-t" "nested"]}
+                  :prod {:source-dir "resources/scss"
+                         :dest-dir "dist/css"
+                         :executable "sassc"
+                         :args ["-I" "scss/" "-t" "compressed"]}}}
   :aliases {"build-pages" ["do"
                            ["run" "-m" "pages/build"]
+                           ["scss" ":prod" "once"]
                            ["cljsbuild" "once" "prod"]]
             "deploy-pages" ["run" "-m" "pages/push"]}
   :profiles {:dev {:source-paths ["dev" "src/cljc"]

@@ -19,8 +19,7 @@
 
 (defn build [& args]
   (println "Building gh-pages")
-  (eval/sh-with-exit-code "Couldn't build css" "lein" "scss" ":dev" "once")
-  (copy (io/resource "public/css/sanakone.css") "dist/css/sanakone.css")
+  (copy (io/resource "public/img") "dist/img")
   (copy (io/resource "public/index.html") "dist/index.html"))
 
 (defn push [& args]
