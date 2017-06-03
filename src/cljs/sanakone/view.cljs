@@ -11,13 +11,18 @@
    (when actions
      [:div.mdl-card__actions.mdl-card--border actions])])
 
+(defn- suggestion [word]
+  [:a {:href "#" :on-click #(re-frame/dispatch [::model/input-text word])} word])
+
 (defn- text-input []
   (let [text (re-frame/subscribe [::model/input-text])]
     (fn []
       [card
-       "sanakone"
+       [:span "sanakone"
+        [:br] [:small "Finnish by rules instead of rote"]]
        [:div
-        [:p "sanakone is a resource for learning Finnish by rules instead of rote"]
+        [:p "Type infinitives below to learn conjugation, such as "
+         [suggestion "laulaa"] ", " [suggestion "juoda"] ", " [suggestion "opiskella"] ", " [suggestion "pelata"] " or " [suggestion "tarvita"]]
         [:div.mdl-textfield
          [:input.mdl-textfield__input
           {:type "text"

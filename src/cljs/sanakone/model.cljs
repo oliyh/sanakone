@@ -28,4 +28,4 @@
  ::init
  interceptors
  (fn [db]
-   {:input-text "laulaa"}))
+   {:input-text ""}))
