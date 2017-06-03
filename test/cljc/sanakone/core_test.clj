@@ -15,6 +15,7 @@
               :person :first-singular
               :translation "sing"
               :pronoun "minä"
+              :conjugated "laulan"
               :word-parts [{:word-type :infinitive
                             :text "laulaa"
                             :description "The infinitive"}
@@ -33,6 +34,7 @@
               :person :first-singular
               :translation "drink"
               :pronoun "minä"
+              :conjugated "juon"
               :word-parts [{:word-type :infinitive
                             :text "juoda"
                             :description "The infinitive"}
@@ -51,6 +53,7 @@
               :person :first-singular
               :translation "study something"
               :pronoun "minä"
+              :conjugated "opiskelen"
               :word-parts [{:word-type :infinitive
                             :text "opiskella"
                             :description "The infinitive"}
@@ -72,6 +75,7 @@
               :person :first-singular
               :translation "play"
               :pronoun "minä"
+              :conjugated "pelaan"
               :word-parts [{:word-type :infinitive
                             :text "pelata"
                             :description "The infinitive"}
@@ -93,6 +97,7 @@
               :person :first-singular
               :translation "need"
               :pronoun "minä"
+              :conjugated "tarvitsen"
               :word-parts [{:word-type :infinitive
                             :text "tarvita"
                             :description "The infinitive"}
@@ -109,12 +114,5 @@
              (kone/conjugate "tarvita" {:person :first-singular})))))
 
   (testing "vowel harmony"
-    (is (= "herään" (-> (kone/conjugate "herätä" {:person :first-singular})
-                        :word-parts
-                        last
-                        :text)))
-
-    (is (= "hävitsen" (-> (kone/conjugate "hävitä" {:person :first-singular})
-                          :word-parts
-                          last
-                          :text)))))
+    (is (= "herään" (:conjugated (kone/conjugate "herätä" {:person :first-singular}))))
+    (is (= "hävitsen" (:conjugated (kone/conjugate "hävitä" {:person :first-singular}))))))

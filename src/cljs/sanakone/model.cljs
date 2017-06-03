@@ -22,9 +22,7 @@
  (fn []
    [(re-frame/subscribe [::input-text])])
  (fn [[input-text]]
-   (when-let [{:keys [word-parts] :as result}
-              (kone/conjugate input-text {:person :first-singular})]
-     (assoc result :conjugated (-> result :word-parts last :text)))))
+   (kone/conjugate input-text {:person :first-singular})))
 
 (re-frame/reg-event-db
  ::init

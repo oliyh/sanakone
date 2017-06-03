@@ -86,9 +86,11 @@
                  :rule-name rule-name
                  :person person
                  :translation (translate/verb infinitive)
-                 :pronoun (get pronouns person)}]
+                 :pronoun (get pronouns person)}
+          word-parts (reduce (fn [parts transform]
+                               (conj parts (transform input (:text (last parts)))))
+                             [(classify-infinitive infinitive)]
+                             transforms)]
       (assoc input
-             :word-parts (reduce (fn [parts transform]
-                                   (conj parts (transform input (:text (last parts)))))
-                                 [(classify-infinitive infinitive)]
-                                 transforms)))))
+             :word-parts word-parts
+             :conjugated (-> word-parts last :text)))))
