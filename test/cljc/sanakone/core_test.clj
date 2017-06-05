@@ -80,99 +80,198 @@
                (kone/conjugate "laulaa" {:person :third-singular})))))
 
     (testing "type two verbs"
-      (is (= {:infinitive "juoda"
-              :rule-id :type-two-verb
-              :rule-name "Type 2 verb"
-              :person :first-singular
-              :translation "to drink"
-              :pronoun "minä"
-              :conjugated "juon"
-              :word-parts [{:word-type :infinitive
-                            :text "juoda"
-                            :description "The infinitive"}
-                           {:word-type :stem
-                            :text "juo"
-                            :description "Remove the infinitive marker 'da'"}
-                           {:word-type :personal-ending
-                            :text "juon"
-                            :description "The personal ending for first-singular is 'n'"}]}
+      (testing "first person"
+        (is (= {:infinitive "juoda"
+                :rule-id :type-two-verb
+                :rule-name "Type 2 verb"
+                :person :first-singular
+                :translation "to drink"
+                :pronoun "minä"
+                :conjugated "juon"
+                :word-parts [{:word-type :infinitive
+                              :text "juoda"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "juo"
+                              :description "Remove the infinitive marker 'da'"}
+                             {:word-type :personal-ending
+                              :text "juon"
+                              :description "The personal ending for first-singular is 'n'"}]}
 
-             (kone/conjugate "juoda" {:person :first-singular}))))
+               (kone/conjugate "juoda" {:person :first-singular}))))
+
+      (testing "second person"
+        (is (= {:infinitive "juoda"
+                :rule-id :type-two-verb
+                :rule-name "Type 2 verb"
+                :person :second-singular
+                :translation "to drink"
+                :pronoun "sinä"
+                :conjugated "juot"
+                :word-parts [{:word-type :infinitive
+                              :text "juoda"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "juo"
+                              :description "Remove the infinitive marker 'da'"}
+                             {:word-type :personal-ending
+                              :text "juot"
+                              :description "The personal ending for second-singular is 't'"}]}
+
+               (kone/conjugate "juoda" {:person :second-singular})))))
 
     (testing "type three verbs"
-      (is (= {:infinitive "opiskella"
-              :rule-id :type-three-verb
-              :rule-name "Type 3 verb"
-              :person :first-singular
-              :translation "to study something"
-              :pronoun "minä"
-              :conjugated "opiskelen"
-              :word-parts [{:word-type :infinitive
-                            :text "opiskella"
-                            :description "The infinitive"}
-                           {:word-type :stem
-                            :text "opiskel"
-                            :description "Remove the infinitive marker 'la'"}
-                           {:word-type :consonant-gradation
-                            :text "opiskel"
-                            :description "Apply consonant gradation (weak-strong)"}
-                           {:word-type :vowel-addition
-                            :text "opiskele"
-                            :description "Add 'e' before the personal ending"}
-                           {:word-type :personal-ending
-                            :text "opiskelen"
-                            :description "The personal ending for first-singular is 'n'"}]}
+      (testing "first person"
+        (is (= {:infinitive "opiskella"
+                :rule-id :type-three-verb
+                :rule-name "Type 3 verb"
+                :person :first-singular
+                :translation "to study something"
+                :pronoun "minä"
+                :conjugated "opiskelen"
+                :word-parts [{:word-type :infinitive
+                              :text "opiskella"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "opiskel"
+                              :description "Remove the infinitive marker 'la'"}
+                             {:word-type :consonant-gradation
+                              :text "opiskel"
+                              :description "Apply consonant gradation (weak-strong)"}
+                             {:word-type :vowel-addition
+                              :text "opiskele"
+                              :description "Add 'e' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "opiskelen"
+                              :description "The personal ending for first-singular is 'n'"}]}
 
-             (kone/conjugate "opiskella" {:person :first-singular}))))
+               (kone/conjugate "opiskella" {:person :first-singular}))))
+
+      (testing "second person"
+        (is (= {:infinitive "opiskella"
+                :rule-id :type-three-verb
+                :rule-name "Type 3 verb"
+                :person :second-singular
+                :translation "to study something"
+                :pronoun "sinä"
+                :conjugated "opiskelet"
+                :word-parts [{:word-type :infinitive
+                              :text "opiskella"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "opiskel"
+                              :description "Remove the infinitive marker 'la'"}
+                             {:word-type :consonant-gradation
+                              :text "opiskel"
+                              :description "Apply consonant gradation (weak-strong)"}
+                             {:word-type :vowel-addition
+                              :text "opiskele"
+                              :description "Add 'e' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "opiskelet"
+                              :description "The personal ending for second-singular is 't'"}]}
+
+               (kone/conjugate "opiskella" {:person :second-singular})))))
 
     (testing "type four verbs"
-      (is (= {:infinitive "pelata"
-              :rule-id :type-four-verb
-              :rule-name "Type 4 verb"
-              :person :first-singular
-              :translation "to play"
-              :pronoun "minä"
-              :conjugated "pelaan"
-              :word-parts [{:word-type :infinitive
-                            :text "pelata"
-                            :description "The infinitive"}
-                           {:word-type :stem
-                            :text "pela"
-                            :description "Remove the infinitive marker 'ta'"}
-                           {:word-type :consonant-gradation
-                            :text "pela"
-                            :description "Apply consonant gradation (weak-strong)"}
-                           {:word-type :vowel-addition
-                            :text "pelaa"
-                            :description "Add 'a' before the personal ending"}
-                           {:word-type :personal-ending
-                            :text "pelaan"
-                            :description "The personal ending for first-singular is 'n'"}]}
+      (testing "first person"
+        (is (= {:infinitive "pelata"
+                :rule-id :type-four-verb
+                :rule-name "Type 4 verb"
+                :person :first-singular
+                :translation "to play"
+                :pronoun "minä"
+                :conjugated "pelaan"
+                :word-parts [{:word-type :infinitive
+                              :text "pelata"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "pela"
+                              :description "Remove the infinitive marker 'ta'"}
+                             {:word-type :consonant-gradation
+                              :text "pela"
+                              :description "Apply consonant gradation (weak-strong)"}
+                             {:word-type :vowel-addition
+                              :text "pelaa"
+                              :description "Add 'a' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "pelaan"
+                              :description "The personal ending for first-singular is 'n'"}]}
 
-             (kone/conjugate "pelata" {:person :first-singular}))))
+               (kone/conjugate "pelata" {:person :first-singular}))))
+
+      (testing "second person"
+        (is (= {:infinitive "pelata"
+                :rule-id :type-four-verb
+                :rule-name "Type 4 verb"
+                :person :second-singular
+                :translation "to play"
+                :pronoun "sinä"
+                :conjugated "pelaat"
+                :word-parts [{:word-type :infinitive
+                              :text "pelata"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "pela"
+                              :description "Remove the infinitive marker 'ta'"}
+                             {:word-type :consonant-gradation
+                              :text "pela"
+                              :description "Apply consonant gradation (weak-strong)"}
+                             {:word-type :vowel-addition
+                              :text "pelaa"
+                              :description "Add 'a' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "pelaat"
+                              :description "The personal ending for second-singular is 't'"}]}
+
+               (kone/conjugate "pelata" {:person :second-singular})))))
 
     (testing "type five verbs"
-      (is (= {:infinitive "tarvita"
-              :rule-id :type-five-verb
-              :rule-name "Type 5 verb"
-              :person :first-singular
-              :translation "to need"
-              :pronoun "minä"
-              :conjugated "tarvitsen"
-              :word-parts [{:word-type :infinitive
-                            :text "tarvita"
-                            :description "The infinitive"}
-                           {:word-type :stem
-                            :text "tarvit"
-                            :description "Remove the infinitive marker 'a'"}
-                           {:word-type :vowel-addition
-                            :text "tarvitse"
-                            :description "Add 'se' before the personal ending"}
-                           {:word-type :personal-ending
-                            :text "tarvitsen"
-                            :description "The personal ending for first-singular is 'n'"}]}
+      (testing "first person"
+        (is (= {:infinitive "tarvita"
+                :rule-id :type-five-verb
+                :rule-name "Type 5 verb"
+                :person :first-singular
+                :translation "to need"
+                :pronoun "minä"
+                :conjugated "tarvitsen"
+                :word-parts [{:word-type :infinitive
+                              :text "tarvita"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "tarvit"
+                              :description "Remove the infinitive marker 'a'"}
+                             {:word-type :vowel-addition
+                              :text "tarvitse"
+                              :description "Add 'se' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "tarvitsen"
+                              :description "The personal ending for first-singular is 'n'"}]}
 
-             (kone/conjugate "tarvita" {:person :first-singular})))))
+               (kone/conjugate "tarvita" {:person :first-singular}))))
+
+      (testing "second person"
+        (is (= {:infinitive "tarvita"
+                :rule-id :type-five-verb
+                :rule-name "Type 5 verb"
+                :person :second-singular
+                :translation "to need"
+                :pronoun "sinä"
+                :conjugated "tarvitset"
+                :word-parts [{:word-type :infinitive
+                              :text "tarvita"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "tarvit"
+                              :description "Remove the infinitive marker 'a'"}
+                             {:word-type :vowel-addition
+                              :text "tarvitse"
+                              :description "Add 'se' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "tarvitset"
+                              :description "The personal ending for second-singular is 't'"}]}
+
+               (kone/conjugate "tarvita" {:person :second-singular}))))))
 
   (testing "vowel harmony"
     (is (= "herään" (:conjugated (kone/conjugate "herätä" {:person :first-singular}))))
