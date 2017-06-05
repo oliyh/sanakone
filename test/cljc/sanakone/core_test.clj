@@ -10,26 +10,49 @@
 
   (testing "present tense"
     (testing "type one verbs"
-      (is (= {:infinitive "laulaa"
-              :rule-name "Type 1 verb"
-              :person :first-singular
-              :translation "sing"
-              :pronoun "minä"
-              :conjugated "laulan"
-              :word-parts [{:word-type :infinitive
-                            :text "laulaa"
-                            :description "The infinitive"}
-                           {:word-type :stem
-                            :text "laula"
-                            :description "Remove the infinitive marker 'a'"}
-                           {:word-type :consonant-gradation
-                            :text "laula"
-                            :description "Apply consonant gradation (strong-weak)"}
-                           {:word-type :personal-ending
-                            :text "laulan"
-                            :description "The personal ending for first-singular is n"}]}
+      (testing "first person"
+        (is (= {:infinitive "laulaa"
+                :rule-name "Type 1 verb"
+                :person :first-singular
+                :translation "sing"
+                :pronoun "minä"
+                :conjugated "laulan"
+                :word-parts [{:word-type :infinitive
+                              :text "laulaa"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "laula"
+                              :description "Remove the infinitive marker 'a'"}
+                             {:word-type :consonant-gradation
+                              :text "laula"
+                              :description "Apply consonant gradation (strong-weak)"}
+                             {:word-type :personal-ending
+                              :text "laulan"
+                              :description "The personal ending for first-singular is n"}]}
 
-             (kone/conjugate "laulaa" {:person :first-singular}))))
+               (kone/conjugate "laulaa" {:person :first-singular}))))
+
+      (testing "second person"
+        (is (= {:infinitive "laulaa"
+                :rule-name "Type 1 verb"
+                :person :second-singular
+                :translation "sing"
+                :pronoun "sinä"
+                :conjugated "laulat"
+                :word-parts [{:word-type :infinitive
+                              :text "laulaa"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "laula"
+                              :description "Remove the infinitive marker 'a'"}
+                             {:word-type :consonant-gradation
+                              :text "laula"
+                              :description "Apply consonant gradation (strong-weak)"}
+                             {:word-type :personal-ending
+                              :text "laulat"
+                              :description "The personal ending for second-singular is t"}]}
+
+               (kone/conjugate "laulaa" {:person :second-singular})))))
 
     (testing "type two verbs"
       (is (= {:infinitive "juoda"

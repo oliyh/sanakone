@@ -4,10 +4,12 @@
             [clojure.string :as string]))
 
 (def pronouns
-  {:first-singular "minä"})
+  {:first-singular "minä"
+   :second-singular "sinä"})
 
 (def personal-endings
-  {:first-singular "n"})
+  {:first-singular "n"
+   :second-singular "t"})
 
 (defn- harmonic-vowel [text vowel]
   (if (re-find #"[aou]" text)
