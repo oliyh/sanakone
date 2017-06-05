@@ -75,7 +75,7 @@
                               :description "Apply consonant gradation (strong-weak)"}
                              {:word-type :personal-ending
                               :text "laulaa"
-                              :description "The last vowel is lengthened for third-singular of Type 1 verb"}]}
+                              :description "The last vowel is lengthened for the personal ending"}]}
 
                (kone/conjugate "laulaa" {:person :third-singular})))))
 
@@ -136,7 +136,7 @@
                               :description "Remove the infinitive marker 'da'"}
                              {:word-type :personal-ending
                               :text "juo"
-                              :description "There is no lengthening of the third-singular of Type 2 verb"}]}
+                              :description "There is no lengthening of the third-singular of Type 2 verb for the personal ending"}]}
 
                (kone/conjugate "juoda" {:person :third-singular})))))
 
@@ -215,7 +215,7 @@
                               :description "Add 'e' before the personal ending"}
                              {:word-type :personal-ending
                               :text "opiskelee"
-                              :description "The last vowel is lengthened for third-singular of Type 3 verb"}]}
+                              :description "The last vowel is lengthened for the personal ending"}]}
 
                (kone/conjugate "opiskella" {:person :third-singular})))))
 
@@ -294,7 +294,7 @@
                               :description "Add 'a' before the personal ending"}
                              {:word-type :personal-ending
                               :text "pelaa"
-                              :description "The last vowel is lengthened for third-singular of Type 4 verb"}]}
+                              :description "The last vowel is lengthened for the personal ending"}]}
 
                (kone/conjugate "pelata" {:person :third-singular})))))
 
@@ -364,7 +364,7 @@
                               :description "Add 'se' before the personal ending"}
                              {:word-type :personal-ending
                               :text "tarvitsee"
-                              :description "The last vowel is lengthened for third-singular of Type 5 verb"}]}
+                              :description "The last vowel is lengthened for the personal ending"}]}
 
                (kone/conjugate "tarvita" {:person :third-singular}))))))
 
