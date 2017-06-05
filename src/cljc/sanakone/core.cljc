@@ -77,10 +77,10 @@
      :text text
      :description (str "There is no lengthening of the " (name person) " of " rule-name)}
 
-    (and (= :third-singular person)
-         (not (apply = (take-last 2 text))))
+    (= :third-singular person)
     {:word-type :personal-ending
-     :text (str text (last text))
+     :text (str text (when-not (apply = (take-last 2 text))
+                       (last text)))
      :description (str "The last vowel is lengthened for " (name person) " of " rule-name)}
 
     :else

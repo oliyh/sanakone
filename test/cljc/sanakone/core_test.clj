@@ -118,7 +118,27 @@
                               :text "juot"
                               :description "The personal ending for second-singular is 't'"}]}
 
-               (kone/conjugate "juoda" {:person :second-singular})))))
+               (kone/conjugate "juoda" {:person :second-singular}))))
+
+      (testing "third person"
+        (is (= {:infinitive "juoda"
+                :rule-id :type-two-verb
+                :rule-name "Type 2 verb"
+                :person :third-singular
+                :translation "to drink"
+                :pronoun "hän"
+                :conjugated "juo"
+                :word-parts [{:word-type :infinitive
+                              :text "juoda"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "juo"
+                              :description "Remove the infinitive marker 'da'"}
+                             {:word-type :personal-ending
+                              :text "juo"
+                              :description "There is no lengthening of the third-singular of Type 2 verb"}]}
+
+               (kone/conjugate "juoda" {:person :third-singular})))))
 
     (testing "type three verbs"
       (testing "first person"
@@ -171,7 +191,33 @@
                               :text "opiskelet"
                               :description "The personal ending for second-singular is 't'"}]}
 
-               (kone/conjugate "opiskella" {:person :second-singular})))))
+               (kone/conjugate "opiskella" {:person :second-singular}))))
+
+      (testing "third person"
+        (is (= {:infinitive "opiskella"
+                :rule-id :type-three-verb
+                :rule-name "Type 3 verb"
+                :person :third-singular
+                :translation "to study something"
+                :pronoun "hän"
+                :conjugated "opiskelee"
+                :word-parts [{:word-type :infinitive
+                              :text "opiskella"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "opiskel"
+                              :description "Remove the infinitive marker 'la'"}
+                             {:word-type :consonant-gradation
+                              :text "opiskel"
+                              :description "Apply consonant gradation (weak-strong)"}
+                             {:word-type :vowel-addition
+                              :text "opiskele"
+                              :description "Add 'e' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "opiskelee"
+                              :description "The last vowel is lengthened for third-singular of Type 3 verb"}]}
+
+               (kone/conjugate "opiskella" {:person :third-singular})))))
 
     (testing "type four verbs"
       (testing "first person"
@@ -224,7 +270,33 @@
                               :text "pelaat"
                               :description "The personal ending for second-singular is 't'"}]}
 
-               (kone/conjugate "pelata" {:person :second-singular})))))
+               (kone/conjugate "pelata" {:person :second-singular}))))
+
+      (testing "third person"
+        (is (= {:infinitive "pelata"
+                :rule-id :type-four-verb
+                :rule-name "Type 4 verb"
+                :person :third-singular
+                :translation "to play"
+                :pronoun "hän"
+                :conjugated "pelaa"
+                :word-parts [{:word-type :infinitive
+                              :text "pelata"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "pela"
+                              :description "Remove the infinitive marker 'ta'"}
+                             {:word-type :consonant-gradation
+                              :text "pela"
+                              :description "Apply consonant gradation (weak-strong)"}
+                             {:word-type :vowel-addition
+                              :text "pelaa"
+                              :description "Add 'a' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "pelaa"
+                              :description "The last vowel is lengthened for third-singular of Type 4 verb"}]}
+
+               (kone/conjugate "pelata" {:person :third-singular})))))
 
     (testing "type five verbs"
       (testing "first person"
@@ -271,7 +343,30 @@
                               :text "tarvitset"
                               :description "The personal ending for second-singular is 't'"}]}
 
-               (kone/conjugate "tarvita" {:person :second-singular}))))))
+               (kone/conjugate "tarvita" {:person :second-singular}))))
+
+      (testing "third person"
+        (is (= {:infinitive "tarvita"
+                :rule-id :type-five-verb
+                :rule-name "Type 5 verb"
+                :person :third-singular
+                :translation "to need"
+                :pronoun "hän"
+                :conjugated "tarvitsee"
+                :word-parts [{:word-type :infinitive
+                              :text "tarvita"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "tarvit"
+                              :description "Remove the infinitive marker 'a'"}
+                             {:word-type :vowel-addition
+                              :text "tarvitse"
+                              :description "Add 'se' before the personal ending"}
+                             {:word-type :personal-ending
+                              :text "tarvitsee"
+                              :description "The last vowel is lengthened for third-singular of Type 5 verb"}]}
+
+               (kone/conjugate "tarvita" {:person :third-singular}))))))
 
   (testing "vowel harmony"
     (is (= "herään" (:conjugated (kone/conjugate "herätä" {:person :first-singular}))))
