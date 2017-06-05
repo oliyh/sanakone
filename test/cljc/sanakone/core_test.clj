@@ -12,9 +12,10 @@
     (testing "type one verbs"
       (testing "first person"
         (is (= {:infinitive "laulaa"
+                :rule-id :type-one-verb
                 :rule-name "Type 1 verb"
                 :person :first-singular
-                :translation "sing"
+                :translation "to sing"
                 :pronoun "minä"
                 :conjugated "laulan"
                 :word-parts [{:word-type :infinitive
@@ -34,9 +35,10 @@
 
       (testing "second person"
         (is (= {:infinitive "laulaa"
+                :rule-id :type-one-verb
                 :rule-name "Type 1 verb"
                 :person :second-singular
-                :translation "sing"
+                :translation "to sing"
                 :pronoun "sinä"
                 :conjugated "laulat"
                 :word-parts [{:word-type :infinitive
@@ -52,13 +54,37 @@
                               :text "laulat"
                               :description "The personal ending for second-singular is 't'"}]}
 
-               (kone/conjugate "laulaa" {:person :second-singular})))))
+               (kone/conjugate "laulaa" {:person :second-singular}))))
+
+      (testing "third person"
+        (is (= {:infinitive "laulaa"
+                :rule-id :type-one-verb
+                :rule-name "Type 1 verb"
+                :person :third-singular
+                :translation "to sing"
+                :pronoun "hän"
+                :conjugated "laulaa"
+                :word-parts [{:word-type :infinitive
+                              :text "laulaa"
+                              :description "The infinitive"}
+                             {:word-type :stem
+                              :text "laula"
+                              :description "Remove the infinitive marker 'a'"}
+                             {:word-type :consonant-gradation
+                              :text "laula"
+                              :description "Apply consonant gradation (strong-weak)"}
+                             {:word-type :personal-ending
+                              :text "laulaa"
+                              :description "The last vowel is lengthened for third-singular of Type 1 verb"}]}
+
+               (kone/conjugate "laulaa" {:person :third-singular})))))
 
     (testing "type two verbs"
       (is (= {:infinitive "juoda"
+              :rule-id :type-two-verb
               :rule-name "Type 2 verb"
               :person :first-singular
-              :translation "drink"
+              :translation "to drink"
               :pronoun "minä"
               :conjugated "juon"
               :word-parts [{:word-type :infinitive
@@ -75,9 +101,10 @@
 
     (testing "type three verbs"
       (is (= {:infinitive "opiskella"
+              :rule-id :type-three-verb
               :rule-name "Type 3 verb"
               :person :first-singular
-              :translation "study something"
+              :translation "to study something"
               :pronoun "minä"
               :conjugated "opiskelen"
               :word-parts [{:word-type :infinitive
@@ -100,9 +127,10 @@
 
     (testing "type four verbs"
       (is (= {:infinitive "pelata"
+              :rule-id :type-four-verb
               :rule-name "Type 4 verb"
               :person :first-singular
-              :translation "play"
+              :translation "to play"
               :pronoun "minä"
               :conjugated "pelaan"
               :word-parts [{:word-type :infinitive
@@ -125,9 +153,10 @@
 
     (testing "type five verbs"
       (is (= {:infinitive "tarvita"
+              :rule-id :type-five-verb
               :rule-name "Type 5 verb"
               :person :first-singular
-              :translation "need"
+              :translation "to need"
               :pronoun "minä"
               :conjugated "tarvitsen"
               :word-parts [{:word-type :infinitive
