@@ -28,7 +28,7 @@
                               :description "Apply consonant gradation (strong-weak)"}
                              {:word-type :personal-ending
                               :text "laulan"
-                              :description "The personal ending for first-singular is n"}]}
+                              :description "The personal ending for first-singular is 'n'"}]}
 
                (kone/conjugate "laulaa" {:person :first-singular}))))
 
@@ -50,7 +50,7 @@
                               :description "Apply consonant gradation (strong-weak)"}
                              {:word-type :personal-ending
                               :text "laulat"
-                              :description "The personal ending for second-singular is t"}]}
+                              :description "The personal ending for second-singular is 't'"}]}
 
                (kone/conjugate "laulaa" {:person :second-singular})))))
 
@@ -69,7 +69,7 @@
                             :description "Remove the infinitive marker 'da'"}
                            {:word-type :personal-ending
                             :text "juon"
-                            :description "The personal ending for first-singular is n"}]}
+                            :description "The personal ending for first-singular is 'n'"}]}
 
              (kone/conjugate "juoda" {:person :first-singular}))))
 
@@ -94,7 +94,7 @@
                             :description "Add 'e' before the personal ending"}
                            {:word-type :personal-ending
                             :text "opiskelen"
-                            :description "The personal ending for first-singular is n"}]}
+                            :description "The personal ending for first-singular is 'n'"}]}
 
              (kone/conjugate "opiskella" {:person :first-singular}))))
 
@@ -119,7 +119,7 @@
                             :description "Add 'a' before the personal ending"}
                            {:word-type :personal-ending
                             :text "pelaan"
-                            :description "The personal ending for first-singular is n"}]}
+                            :description "The personal ending for first-singular is 'n'"}]}
 
              (kone/conjugate "pelata" {:person :first-singular}))))
 
@@ -141,7 +141,7 @@
                             :description "Add 'se' before the personal ending"}
                            {:word-type :personal-ending
                             :text "tarvitsen"
-                            :description "The personal ending for first-singular is n"}]}
+                            :description "The personal ending for first-singular is 'n'"}]}
 
              (kone/conjugate "tarvita" {:person :first-singular})))))
 

@@ -6,4 +6,5 @@
 (defdata verbs "verbs.edn")
 
 (defn verb [finnish]
-  (get verbs (string/lower-case finnish)))
+  (when-let [english (get verbs (string/lower-case finnish))]
+    (str "to " english)))

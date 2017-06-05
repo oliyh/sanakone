@@ -10,7 +10,7 @@
  ::input-text
  interceptors
  (fn [db [text]]
-   (assoc db :input-text (string/lower-case text))))
+   (assoc db :input-text (some-> text string/trim string/lower-case))))
 
 (re-frame/reg-sub
  ::input-text
@@ -50,5 +50,5 @@
  ::init
  interceptors
  (fn [db]
-   {:input-text "laulaa"
+   {:input-text ""
     :person-choice :first-singular}))

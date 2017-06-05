@@ -70,7 +70,7 @@
 (defn- add-personal-ending [{:keys [person]} text]
   {:word-type :personal-ending
    :text (str text (get personal-endings person))
-   :description (str "The personal ending for " (name person) " is " (get personal-endings person))})
+   :description (str "The personal ending for " (name person) " is '" (get personal-endings person) "'")})
 
 (def type-one-verb
   {:rule-name "Type 1 verb"

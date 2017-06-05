@@ -13,6 +13,18 @@ body {
             width: inherit;
         }
     }
+
+    .mdl-card__supporting-text {
+        margin: 0 auto;
+    }
+}
+
+.mdl-tabs {
+    margin-top: -34px;
+
+    .mdl-tabs__tab {
+        cursor: pointer;
+    }
 }
 
 .mdl-textfield {
@@ -62,9 +74,15 @@ body {
     .transforms {
         .text, .description {
             display: inline-block;
-            width: 50%;
+            width: calc(50% - 16px);
             vertical-align: top;
             margin-top: 12px;
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+
+        .description {
+            text-align: right;
         }
     }
 }

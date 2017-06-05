@@ -22,8 +22,7 @@
         (for [{:keys [person pronoun selected?]} @choices]
           ^{:key person}
           [:a.mdl-tabs__tab
-           {:href "#"
-            :on-click #(re-frame/dispatch [::model/person-choice person])
+           {:on-click #(re-frame/dispatch [::model/person-choice person])
             :class (when selected? "is-active")}
            pronoun
            [:span.mdl-tabs__ripple-container.mdl-js-ripple-effect
@@ -54,20 +53,22 @@
       (when-let [{:keys [rule-name infinitive translation pronoun conjugated word-parts]}
                  @result]
         [card
-         [:div infinitive (when translation [:small " (" translation ")"])
+         [:div infinitive (when translation [:small (str " (" translation ")")])
           [:span.rule-name [:small rule-name]]]
          [:div
           [person-choice]
           [:div.word-result
-           [:div.conjugated {:title "conjugated"} conjugated]
+           [:div.conjugated
+            [:span.pronoun {:title "pronoun"} pronoun]
+            " "
+            [:span {:title "conjugated"} conjugated]]
            [:div.transforms
             (for [{:keys [word-type text description]} word-parts]
               ^{:key word-type}
               [:div {:title (name word-type)
                      :class (name word-type)}
-               [:div.text text]
-               [:div.description
-                description]])]]]]))))
+               [:div.description description ":"]
+               [:div.text text]])]]]]))))
 
 (defn home []
   (re-frame/dispatch-sync [::model/init])
