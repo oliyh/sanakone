@@ -14,21 +14,39 @@
 (defn- suggestion [word]
   [:a {:href "#" :on-click #(re-frame/dispatch [::model/input-text word])} word])
 
+(defn- person-choice []
+  (let [choices (re-frame/subscribe [::model/pronouns])]
+    (fn []
+      [:div.mdl-tabs.is-upgraded
+       [:div.mdl-tabs__tab-bar
+        (for [{:keys [person pronoun selected?]} @choices]
+          ^{:key person}
+          [:a.mdl-tabs__tab
+           {:href "#"
+            :on-click #(re-frame/dispatch [::model/person-choice person])
+            :class (when selected? "is-active")}
+           pronoun
+           [:span.mdl-tabs__ripple-container.mdl-js-ripple-effect
+            [:span.mdl-ripple]]])]])))
+
 (defn- text-input []
   (let [text (re-frame/subscribe [::model/input-text])]
     (fn []
-      [card
-       [:span "sanakone"
-        [:br] [:small "Finnish by rules instead of rote"]]
-       [:div
-        [:p "Type infinitives below to learn conjugation, such as "
-         [suggestion "laulaa"] ", " [suggestion "juoda"] ", " [suggestion "opiskella"] ", " [suggestion "pelata"] " or " [suggestion "tarvita"]]
-        [:div.mdl-textfield
-         [:input.mdl-textfield__input
-          {:type "text"
-           :value @text
-           :placeholder "Type an infinitive verb e.g. laulaa"
-           :on-change #(re-frame/dispatch [::model/input-text (-> % .-target .-value)])}]]]])))
+      [:div.mdl-textfield
+       [:input.mdl-textfield__input
+        {:type "text"
+         :value @text
+         :placeholder "Type an infinitive verb e.g. laulaa"
+         :on-change #(re-frame/dispatch [::model/input-text (-> % .-target .-value)])}]])))
+
+(defn- input-card []
+  [card
+   [:span "sanakone"
+    [:br] [:small "Finnish by rules instead of rote"]]
+   [:div
+    [:p "Type infinitives below to learn conjugation, such as "
+     [suggestion "laulaa"] ", " [suggestion "juoda"] ", " [suggestion "opiskella"] ", " [suggestion "pelata"] " or " [suggestion "tarvita"]]
+    [text-input]]])
 
 (defn- result []
   (let [result (re-frame/subscribe [::model/result])]
@@ -36,14 +54,12 @@
       (when-let [{:keys [rule-name infinitive translation pronoun conjugated word-parts]}
                  @result]
         [card
-         [:span infinitive (when translation [:small " (" translation ")"])
-          [:br] [:small rule-name]]
+         [:div infinitive (when translation [:small " (" translation ")"])
+          [:span.rule-name [:small rule-name]]]
          [:div
+          [person-choice]
           [:div.word-result
-           [:div
-            [:span.pronoun {:title "pronoun"} pronoun]
-            " "
-            [:span.conjugated {:title "conjugated"} conjugated]]
+           [:div.conjugated {:title "conjugated"} conjugated]
            [:div.transforms
             (for [{:keys [word-type text description]} word-parts]
               ^{:key word-type}
@@ -58,5 +74,5 @@
   (fn []
     [:div
      [:div.mdl-grid
-      [text-input]
+      [input-card]
       [result]]]))

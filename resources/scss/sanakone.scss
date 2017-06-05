@@ -7,15 +7,23 @@ body {
 
 .mdl-card {
     background-color: rgba(255, 255, 255, 0.9);
+    .mdl-card__title-text {
+        width: 100%;
+        div {
+            width: inherit;
+        }
+    }
 }
 
 .mdl-textfield {
     width: 100%;
 }
 
-.word-result {
-    font-size: 2em;
+.rule-name {
+    float: right;
+}
 
+.word-result {
     > * {
         vertical-align: top;
     }
@@ -25,7 +33,10 @@ body {
     }
 
     .conjugated {
+        text-align: center;
         color: rgb(76, 175, 80);
+        line-height: 2em;
+        font-size: 2em;
     }
 
     .infinitive {
@@ -54,7 +65,6 @@ body {
             width: 50%;
             vertical-align: top;
             margin-top: 12px;
-            font-size: 0.5em;
         }
     }
 }
